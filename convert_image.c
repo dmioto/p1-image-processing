@@ -56,6 +56,7 @@ int generate_histogram(PGMFile *pgm, const char filename[]);
  * @param filename name of input argument file
  */
 void set_pgm_file_head(FILE *fp, PGMFile *data);
+
 int main(int argc, char *argv[]) {
 
     PGMFile *pgm = malloc(sizeof(PGMFile));
@@ -87,6 +88,7 @@ int main(int argc, char *argv[]) {
 
     return 0;
 }
+
 int open_pgm_file(FILE *fp, PGMFile *pgm_data, const char filename[]) {
 
     int i, j;
@@ -122,6 +124,7 @@ int open_pgm_file(FILE *fp, PGMFile *pgm_data, const char filename[]) {
 
     return 1;
 }
+
 void show_menu() {
     printf("-------------------------------------------\n");
     printf("O que voce deseja fazer com a imagem? \n");
@@ -162,6 +165,7 @@ void image_options(PGMFile *pgm, const char filename[], int option) {
 
     printf(res ? "\nImagem gerada com sucesso!" : "\nFalha ao gerar imagem");
 }
+
 int threshold_image(PGMFile *pgm, const char filename[]) {
 
     int i, j;
@@ -189,6 +193,7 @@ int threshold_image(PGMFile *pgm, const char filename[]) {
 
     return 1;
 }
+
 int negative_image(PGMFile *pgm, const char filename[]) {
 
     int i, j;
@@ -216,6 +221,7 @@ int negative_image(PGMFile *pgm, const char filename[]) {
 
     return 1;
 }
+
 int generate_histogram(PGMFile *pgm, const char filename[]) {
 
     int i, j;
@@ -253,6 +259,7 @@ int generate_histogram(PGMFile *pgm, const char filename[]) {
 
     return 1;
 }
+
 void set_pgm_file_head(FILE *fp, PGMFile *data) {
     fprintf(fp, "%s\n", data->type);
     fprintf(fp, "%d %d\n", data->row, data->col);
