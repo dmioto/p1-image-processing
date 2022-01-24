@@ -1,4 +1,11 @@
-# p1-image-processing
+# Image processing
+
+Program Functions:
+
+- (1) Thresholding
+- (2) Negative
+- (3) Histogram
+- (4) Run all above
 
 ## Setup to run
 
