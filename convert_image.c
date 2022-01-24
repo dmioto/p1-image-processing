@@ -11,7 +11,7 @@ typedef struct PGMFile {
 } PGMFile;
 
 void show_menu();
-void image_options(PGMFile *pgm, const char filename[], int option);
+void image_options(PGMFile *pgm, int option);
 
 /**
  * Open PGM file
@@ -27,27 +27,24 @@ int open_pgm_file(FILE *fp, PGMFile *pgm_data, const char filename[]);
  * Generate a thresholding pgm file of the pgm image
  * 
  * @param pgm_data pointer to pgm data 
- * @param filename name of input argument file
  * @return true (1) if the image is successfully thresholded (0) if it was not possible to do the thresholding
  */
-int threshold_image(PGMFile *pgm, const char filename[]);
+int threshold_image(PGMFile *pgm);
 /**
  * Generate a negative pgm file of the pgm image
  * 
  * @param pgm_data pointer to pgm data 
- * @param filename name of input argument file
  * @return true (1) if the image is successfully negative (0) if it was not possible to do the negative
  */
-int negative_image(PGMFile *pgm, const char filename[]);
+int negative_image(PGMFile *pgm);
 
 /**
  * Generate a histogram of the pgm image
  * 
  * @param pgm_data pointer to pgm data 
- * @param filename name of input argument file
  * @return true (1) if the histogram is successfully generated (0) if it was not possible to do the histogram
  */
-int generate_histogram(PGMFile *pgm, const char filename[]);
+int generate_histogram(PGMFile *pgm);
 
 /**
  * Set base head file
@@ -78,7 +75,7 @@ int main(int argc, char *argv[]) {
         scanf("%d", &option);
 
         // take option and execute proccess
-        image_options(pgm, filename, option);
+        image_options(pgm, option);
     } else 
         printf("Não foi possível abrir o arquivo!");
 
@@ -137,36 +134,36 @@ void show_menu() {
     printf("\nOpcao: ");
 }
 
-void image_options(PGMFile *pgm, const char filename[], int option) {
+void image_options(PGMFile *pgm, int option) {
 
     int res;
 
     switch (option) {
 
         case 1:
-            res = threshold_image(pgm, filename);
+            res = threshold_image(pgm);
             break;
 
         case 2:
-            res = negative_image(pgm, filename);
+            res = negative_image(pgm);
             break;
     
         case 3:
-            res = generate_histogram(pgm, filename);
+            res = generate_histogram(pgm);
             break;
 
         case 4:
-            res = threshold_image(pgm, filename) == negative_image(pgm, filename) == generate_histogram(pgm, filename);
+            res = threshold_image(pgm) == negative_image(pgm) == generate_histogram(pgm);
             break;
     
         default:
             break;
     }
 
-    printf(res ? "\nImagem gerada com sucesso!" : "\nFalha ao gerar imagem");
+    printf(res ? "\nArquivo gerado com sucesso!" : "\nFalha ao gerar arquivo.");
 }
 
-int threshold_image(PGMFile *pgm, const char filename[]) {
+int threshold_image(PGMFile *pgm) {
 
     int i, j;
     FILE *fp;
@@ -194,7 +191,7 @@ int threshold_image(PGMFile *pgm, const char filename[]) {
     return 1;
 }
 
-int negative_image(PGMFile *pgm, const char filename[]) {
+int negative_image(PGMFile *pgm) {
 
     int i, j;
     FILE *fp;
@@ -222,7 +219,7 @@ int negative_image(PGMFile *pgm, const char filename[]) {
     return 1;
 }
 
-int generate_histogram(PGMFile *pgm, const char filename[]) {
+int generate_histogram(PGMFile *pgm) {
 
     int i, j;
     int *histogram_arr;
