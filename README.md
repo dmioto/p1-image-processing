@@ -1,4 +1,4 @@
-# Image processing
+# PGM Image processing
 
 Program Functions:
 
